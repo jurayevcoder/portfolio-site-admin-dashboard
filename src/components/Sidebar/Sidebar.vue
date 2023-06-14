@@ -5,6 +5,9 @@ import { useRouter } from "vue-router";
 
 const navlink = ref(navLinks);
 const role = ref("");
+const modal = ref(false);
+
+const toggleModal = () => (modal.value = !modal.value);
 
 const router = useRouter();
 
@@ -22,6 +25,7 @@ onMounted(() => {
 <template>
   <div>
     <button
+      @click="toggleModal"
       data-drawer-target="default-sidebar"
       data-drawer-toggle="default-sidebar"
       aria-controls="default-sidebar"
@@ -46,11 +50,17 @@ onMounted(() => {
 
     <aside
       id="default-sidebar"
-      class="fixed top-0 left-0 z-40 w-80 h-screen transition-transform -translate-x-full sm:translate-x-0"
+      :class="
+        !modal
+          ? 'fixed top-0 left-0 z-40 w-80 h-screen transition-transform -translate-x-full sm:translate-x-0'
+          : 'hidden'
+      "
       aria-label="Sidebar"
     >
       <div class="h-[100%] px-3 py-4 overflow-y-auto bg-[#414141]">
-      <h1 class="text-[30px] font-semibold ml-10 mt-5 mb-10 text-[#FF8C00]">Hello, <span class="text-white font-semibold">Boss</span></h1>
+        <h1 class="text-[30px] font-semibold ml-10 mt-5 mb-10 text-[#FF8C00]">
+          Hello, <span class="text-white font-semibold">Boss</span>
+        </h1>
         <ul class="space-y-2 font-medium">
           <li v-for="link in navlink" :key="link.id">
             <router-link
@@ -67,7 +77,44 @@ onMounted(() => {
           @click="logout"
           class="block px-3 py-2 rounded-xl focus:ring-4 ring-gray-500 text-white absolute bottom-3 text-[30px] hover:text-[#FF8C00]"
         >
-        <i class='bx bx-log-out'></i>
+          <i class="bx bx-log-out"></i>
+        </button>
+      </div>
+    </aside>
+
+    <aside
+      id="default-sidebar"
+      :class="
+        modal
+          ? 'fixed top-0 left-0 z-40 w-80 h-screen transition-transform translate-x-0'
+          : 'hidden'
+      "
+      aria-label="Sidebar"
+    >
+      <div class="h-[100%] px-3 py-4 overflow-y-auto bg-[#414141] relative">
+        <button @click="toggleModal" class="absolute right-3 top-3 p-1 text-white rounded-lg flex items-center justify-center hover:text-[#FF8C00] focus:ring-2 focus:ring-[#FF8C00]">
+          <i class="bx bx-x text-[30px]"></i>
+        </button>
+        <h1 class="text-[30px] font-semibold ml-2 mt-10 mb-5 text-[#FF8C00]">
+          Hello, <span class="text-white font-semibold">Boss</span>
+        </h1>
+        <ul class="space-y-2 font-medium">
+          <li v-for="link in navlink" :key="link.id">
+            <router-link
+              :to="link.link"
+              class="flex items-center p-2 rounded-lg text-[20px] text-white border border-[#414141] hover:border-[#FF8C00] hover:text-[#FF8C00]"
+            >
+              <i :class="link.icon"></i>
+              <span class="ml-3">{{ link.title }}</span>
+            </router-link>
+          </li>
+        </ul>
+
+        <button
+          @click="logout"
+          class="block px-3 py-2 rounded-xl focus:ring-4 ring-gray-500 text-white absolute bottom-3 text-[30px] hover:text-[#FF8C00]"
+        >
+          <i class="bx bx-log-out"></i>
         </button>
       </div>
     </aside>
@@ -76,8 +123,8 @@ onMounted(() => {
 
 <style lang="css" scoped>
 .router-link-exact-active {
-  background-color: #FF8C00;
-  border: 1px solid #FF8C00;
+  background-color: #ff8c00;
+  border: 1px solid #ff8c00;
 }
 .router-link-exact-active:hover {
   color: white;
