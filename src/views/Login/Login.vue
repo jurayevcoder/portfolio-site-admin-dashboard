@@ -44,6 +44,21 @@
                 required=""
               />
             </div>
+            <div>
+              <label
+                for="email"
+                class="block mb-2 text-sm font-medium text-white"
+                >Secret key</label
+              >
+              <input
+                type="text"
+                name="key"
+                id="text"
+                class="border sm:text-sm rounded-lg outline-none block w-full p-2.5 bg-[#414141] border-white placeholder-gray-400 text-white"
+                placeholder="key"
+                required=""
+              />
+            </div>
             <div class="flex items-center justify-between">
               <a
                 href="#"

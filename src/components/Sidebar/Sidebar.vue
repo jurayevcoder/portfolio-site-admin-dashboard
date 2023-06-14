@@ -49,7 +49,7 @@ onMounted(() => {
       class="fixed top-0 left-0 z-40 w-80 h-screen transition-transform -translate-x-full sm:translate-x-0"
       aria-label="Sidebar"
     >
-      <div class="h-full px-3 py-4 overflow-y-auto bg-[#414141]">
+      <div class="h-[100%] px-3 py-4 overflow-y-auto bg-[#414141]">
       <h1 class="text-[30px] font-semibold ml-10 mt-5 mb-10 text-[#FF8C00]">Hello, <span class="text-white font-semibold">Boss</span></h1>
         <ul class="space-y-2 font-medium">
           <li v-for="link in navlink" :key="link.id">

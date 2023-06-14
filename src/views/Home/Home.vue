@@ -1,6 +1,6 @@
 <template>
-  <div class="flex items-center justify-between w-full">
-    <div class="min-w-0 rounded-lg shadow-xs overflow-hidden bg-[#414141] w-[23%] cursor-pointer">
+  <div class="w-full flex flex-col  gap-y-5 lg:flex lg:flex-row items-center justify-between">
+    <div class="min-w-0 rounded-lg shadow-xs overflow-hidden bg-[#414141] w-full lg:w-[23%] cursor-pointer">
       <div class="p-4 flex items-center">
         <div class="w-12 h-12 p-3 rounded-full bg-orange-500 mr-4">
           <i
@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div class="min-w-0 rounded-lg shadow-xs overflow-hidden bg-[#414141] w-[23%]">
+    <div class="min-w-0 rounded-lg shadow-xs overflow-hidden bg-[#414141] w-full lg:w-[23%] cursor-pointer">
       <div class="p-4 flex items-center">
         <div
           class="w-12 h-12 p-3 rounded-full bg-green-500 mr-4"
@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <div class="min-w-0 rounded-lg shadow-xs overflow-hidden bg-[#414141] w-[23%]">
+    <div class="min-w-0 rounded-lg shadow-xs overflow-hidden bg-[#414141] w-full lg:w-[23%] cursor-pointer">
       <div class="p-4 flex items-center">
         <div
           class="w-12 h-12 p-3 rounded-full bg-blue-500 mr-4"
@@ -48,7 +48,7 @@
       </div>
     </div>
 
-    <div class="min-w-0 rounded-lg shadow-xs overflow-hidden bg-[#414141] w-[23%]">
+    <div class="min-w-0 rounded-lg shadow-xs overflow-hidden bg-[#414141] w-full lg:w-[23%] cursor-pointer">
       <div class="p-4 flex items-center">
         <div
           class="w-12 h-12 p-3 rounded-full bg-teal-500 mr-4"
