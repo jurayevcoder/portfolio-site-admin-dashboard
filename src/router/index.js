@@ -13,6 +13,11 @@ const router = createRouter({
       ]
     },
     {
+      path: '/login',
+      name: 'login',
+      component: () => import('../views/Login/Login.vue')
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'error',
       component: () => import('../views/Error/Error.vue')
@@ -20,17 +25,17 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach((to, from, next) => {
+// router.beforeEach((to, from, next) => {
 
 
-  let token = localStorage.getItem('token')
+//   let token = localStorage.getItem('token')
 
-  if (to.name !== "login" && !token) {
-    next({ name: 'login' })
-  } else {
-    next()
-  }
-
-})
+//   if (to.name !== "login" && !token) {
+//     next({ name: 'login' })
+//   } else {
+//     next()
+//   }
+  
+// })
 
 export default router
