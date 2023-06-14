@@ -2,14 +2,14 @@ export const navLinks = [
     {
       id: 1,
       title: 'Dashboard',
-      link: '/',
+      link: '/admin-dashboard',
       icon: 'bx bxs-dashboard',
     },
     {
       id: 2,
       title: 'Projects',
       link: '/projects',
-      icon: 'bx bxs-folder',
+      icon: 'bx bxs-folder-plus',
     },
     {
       id: 3,
@@ -21,7 +21,7 @@ export const navLinks = [
       id: 4,
       title: 'Messages',
       link: '/messages',
-      icon: 'bx bxs-message-rounded',
+      icon: 'bx bxs-message-rounded-dots',
     },
     {
       id: 5,

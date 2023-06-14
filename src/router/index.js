@@ -5,11 +5,15 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
+      path: '/dashboard',
       name: 'dashboard',
       component: Dashboard,
       children: [
-
+        {
+          path: '/admin-dashboard',
+          name: 'home',
+          component: () => import('../views/Home/Home.vue')
+        },
       ]
     },
     {
@@ -35,7 +39,7 @@ const router = createRouter({
 //   } else {
 //     next()
 //   }
-  
+
 // })
 
 export default router

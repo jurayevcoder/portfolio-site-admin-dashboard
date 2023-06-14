@@ -75,11 +75,11 @@ onMounted(() => {
 </template>
 
 <style lang="css" scoped>
-.router-link-active {
+.router-link-exact-active {
   background-color: #FF8C00;
   border: 1px solid #FF8C00;
 }
-.router-link-active:hover {
+.router-link-exact-active:hover {
   color: white;
 }
 </style>
