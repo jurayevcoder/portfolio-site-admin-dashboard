@@ -10,7 +10,7 @@ const router = createRouter({
       component: Dashboard,
       children: [
         {
-          path: '/admin-dashboard',
+          path: '/',
           name: 'home',
           component: () => import('../views/Home/Home.vue')
         },
@@ -29,10 +29,15 @@ const router = createRouter({
           name: 'info',
           component: () => import('../views/Info/Info.vue')
         },
+        {
+          path: '/messages',
+          name: 'message',
+          component: () => import('../views/Message/Message.vue')
+        },
       ]
     },
     {
-      path: '/login-admin',
+      path: '/login',
       name: 'login',
       component: () => import('../views/Login/Login.vue')
     },
