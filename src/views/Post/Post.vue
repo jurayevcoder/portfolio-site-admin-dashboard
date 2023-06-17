@@ -75,13 +75,8 @@
           </div>
 
           <div
-            class="w-full flex flex-col gap-5 md:flex md:flex-row items-center justify-between"
+            class="w-full flex flex-col gap-5 md:flex md:flex-row items-center justify-end"
           >
-            <button
-              class="w-full md:w-[20%] bg-red-600 py-2.5 rounded-lg text-white font-bold border-2 border-red-600 hover:bg-[#414141] hover:text-red-600"
-            >
-              CLEAR
-            </button>
             <button
               class="w-full md:w-[20%] bg-blue-500 py-2.5 rounded-lg text-white font-bold border-2 border-blue-500 hover:bg-[#414141] hover:text-blue-500"
             >
