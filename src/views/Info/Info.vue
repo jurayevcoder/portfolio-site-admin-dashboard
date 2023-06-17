@@ -6,7 +6,7 @@
       >
         <h3 class="text-[24px] font-semibold text-white">Info</h3>
       </div>
-      <form class="w-full p-5">
+      <form class="w-full p-5" @submit.prevent="addInfo">
         <div class="w-full flex flex-col items-center gap-8 mb-20">
           <div
             class="w-full flex flex-col items-center justify-between gap-8 lg:flex lg:flex-row"
@@ -16,12 +16,14 @@
                 >Image avatar</label
               >
               <input
+                accept="image/jpg, image/jpeg, image/png"
                 type="file"
                 name="image"
                 id="image"
                 class="w-full lg:w-[50%] h-14 bg-[#414141] border outline-none border-white border-dashed rounded-lg block p-3 cursor-pointer"
                 placeholder=""
                 required=""
+                @change="(e) => setImg(e)"
               />
             </div>
             <div class="w-full lg:w-[50%]">
@@ -29,6 +31,7 @@
                 >Full name</label
               >
               <input
+                v-model="info.fullname"
                 type="name"
                 name="fullname"
                 id="fullname"
@@ -45,6 +48,7 @@
                 >Phone number</label
               >
               <input
+                v-model="info.phone"
                 type="phone"
                 name="phone"
                 id="phone"
@@ -58,6 +62,7 @@
                 >Email</label
               >
               <input
+                v-model="info.email"
                 type="email"
                 name="email"
                 id="email"
@@ -74,6 +79,7 @@
                 >Birthday</label
               >
               <input
+                v-model="info.birthday"
                 type="date"
                 name="birthday"
                 id="birthday"
@@ -86,6 +92,7 @@
                 >Age</label
               >
               <input
+                v-model="info.age"
                 type="number"
                 name="age"
                 id="age"
@@ -104,6 +111,7 @@
                 >Experience</label
               >
               <input
+                v-model="info.experience"
                 type="text"
                 name="experience"
                 id="experience"
@@ -117,6 +125,7 @@
                 >About</label
               >
               <input
+                v-model="info.about"
                 type="text"
                 name="about"
                 id="about"
@@ -142,17 +151,14 @@
   </div>
 
   <div class="w-full mb-14 pb-14 border-b-2 border-[#414141] border-dashed">
-
     <div class="relative rounded-lg w-full bg-[#414141]">
       <div
         class="flex justify-between items-center p-4 pl-10 sm:mb-5 bg-[#FF8C00] rounded-t-lg"
       >
-        <h3 class="text-[24px] font-semibold text-white">Scill</h3>
+        <h3 class="text-[24px] font-semibold text-white">Skill</h3>
       </div>
 
-
-
-      <form class="w-full p-5">
+      <form class="w-full p-5" @submit.prevent="addSkill">
         <div class="w-full flex flex-col items-center gap-8 mb-20">
           <div class="w-full flex flex-col justify-between gap-8 lg:flex lg:flex-row">
             <div class="w-full lg:w-[50%]">
@@ -160,6 +166,7 @@
                 >Name</label
               >
               <input
+                v-model="skillInfo.name"
                 type="text"
                 name="name-scill"
                 id="name"
@@ -173,6 +180,7 @@
                 >Icon</label
               >
               <input
+                v-model="skillInfo.icon"
                 type="text"
                 name="icon"
                 id="icon"
@@ -205,9 +213,7 @@
         <h3 class="text-[24px] font-semibold text-white">Worked</h3>
       </div>
 
-
-
-      <form class="w-full p-5">
+      <form class="w-full p-5" @submit.prevent="addWorked">
         <div class="w-full flex flex-col items-center gap-8 mb-20">
           <div class="w-full flex flex-col justify-between gap-8 lg:flex lg:flex-row">
             <div class="w-full lg:w-[50%]">
@@ -215,6 +221,7 @@
                 >Name</label
               >
               <input
+                v-model="workedInfo.name"
                 type="text"
                 name="name-work"
                 id="name"
@@ -228,6 +235,7 @@
                 >Link</label
               >
               <input
+                v-model="workedInfo.link"
                 type="text"
                 name="link"
                 id="link"
@@ -260,8 +268,7 @@
         <h3 class="text-[24px] font-semibold text-white">Social media</h3>
       </div>
 
-
-      <form class="w-full p-5">
+      <form class="w-full p-5" @submit.prevent="addSocialMedia">
         <div class="w-full flex flex-col items-center gap-8 mb-20">
           <div class="w-full flex flex-col justify-between gap-8 lg:flex lg:flex-row">
             <div class="w-full lg:w-[50%]">
@@ -269,6 +276,7 @@
                 >Name</label
               >
               <input
+                v-model="socialMediaInfo.name"
                 type="text"
                 name="name-social-media"
                 id="name"
@@ -282,6 +290,7 @@
                 >Link</label
               >
               <input
+                v-model="socialMediaInfo.link"
                 type="text"
                 name="link"
                 id="link"
@@ -298,6 +307,7 @@
                 >Icon</label
               >
               <input
+                v-model="socialMediaInfo.icon"
                 type="text"
                 name="icon"
                 id="icon"
@@ -324,25 +334,222 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { reactive, ref } from "vue";
+import { toast } from "vue3-toastify";
+import { useInfo } from "../../service/Info";
+import { useSkill } from "../../service/Skill";
+import { useWorked } from "../../service/Worked";
+import { useSocialMedia } from "../../service/Social-media";
 
-const show = ref(true);
-const add = ref(false);
+// Info
 
-const showWork = ref(true);
-const addWork = ref(false);
+const getImg = ref(null);
+const setImg = (e) => {
+  getImg.value = e.target.files[0];
+};
 
-const showSocial = ref(true);
-const addSocial = ref(false);
+const info = reactive({
+  fullname: "",
+  phone: "",
+  email: "",
+  birthday: "",
+  age: "",
+  about: "",
+  experience: "",
+});
 
-const btnShow = () => (show.value = true) && (add.value = false);
-const btnAdd = () => (add.value = true) && (show.value = false);
+const addInfo = () => {
+  const ageInt = ref(Number(age.value));
+  const infos = {
+    avatar: getImg.value.name,
+    fullname: info.fullname,
+    phone: info.phone,
+    email: info.email,
+    birthday: info.birthday,
+    age: ageInt.value,
+    about: info.about,
+    experience: info.experience,
+  };
 
-const btnWorkShow = () => (showWork.value = true) && (addWork.value = false);
-const btnWorkAdd = () => (addWork.value = true) && (showWork.value = false);
+  const lengthInfo = ref(
+    useInfo
+      .show()
+      .then((result) => {
+        console.log(result.data.length);
+        if (result.data.length > 0) {
+          useInfo.change(result.data[0].id, infos);
+          toast.success("Successfully change info !", {
+            autoClose: 5000,
+            theme: "dark",
+            pauseOnHover: true,
+          });
+        } else {
+          useInfo.create(infos);
+          toast.success("Successfully added info !", {
+            autoClose: 5000,
+            theme: "dark",
+            pauseOnHover: true,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  );
 
-const btnSocialShow = () => (showSocial.value = true) && (addSocial.value = false);
-const btnSocialAdd = () => (addSocial.value = true) && (showSocial.value = false);
+  info.fullname = "";
+  info.phone = "";
+  info.email = "";
+  info.birthday = "";
+  info.age = "";
+  info.about = "";
+  info.experience = "";
+};
+
+// Skill
+
+const skillInfo = reactive({
+  name: "",
+  icon: "",
+});
+
+const addSkill = () => {
+  const lamp = ref(true);
+  const skill = {
+    name: skillInfo.name,
+    icon: skillInfo.icon,
+  };
+
+  const lengthSkill = ref(
+    useSkill
+      .show()
+      .then((result) => {
+        for (let i = 0; i < result.data.length; i++) {
+          if (skill.name == result.data[i].name) {
+            lamp.value = false;
+            useSkill.change(result.data[i].id, skill);
+            toast.success("Successfully change skill !", {
+              autoClose: 5000,
+              theme: "dark",
+              pauseOnHover: true,
+            });
+          }
+        }
+        if (lamp.value) {
+          useSkill.create(skill);
+          toast.success("Successfully added skill !", {
+            autoClose: 5000,
+            theme: "dark",
+            pauseOnHover: true,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  );
+
+  skillInfo.name = "";
+  skillInfo.icon = "";
+};
+
+// Worked
+
+const workedInfo = reactive({
+  name: "",
+  link: "",
+});
+
+const addWorked = () => {
+  const lamp = ref(true);
+  const worked = {
+    name: workedInfo.name,
+    link: workedInfo.link,
+  };
+
+  const lengthWorked = ref(
+    useWorked
+      .show()
+      .then((result) => {
+        for (let i = 0; i < result.data.length; i++) {
+          if (worked.name == result.data[i].name) {
+            lamp.value = false;
+            useWorked.change(result.data[i].id, worked);
+            toast.success("Successfully change worked !", {
+              autoClose: 5000,
+              theme: "dark",
+              pauseOnHover: true,
+            });
+          }
+        }
+        if (lamp.value) {
+          useWorked.create(worked);
+          toast.success("Successfully added worked !", {
+            autoClose: 5000,
+            theme: "dark",
+            pauseOnHover: true,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  );
+
+  workedInfo.name = "";
+  workedInfo.link = "";
+};
+
+// Social Media
+
+const socialMediaInfo = reactive({
+  name: "",
+  link: "",
+  icon: "",
+});
+
+const addSocialMedia = () => {
+  const lamp = ref(true);
+  const socialMedia = {
+    name: socialMediaInfo.name,
+    link: socialMediaInfo.link,
+    icon: socialMediaInfo.icon,
+  };
+
+  const lengthSocialMedia = ref(
+    useSocialMedia
+      .show()
+      .then((result) => {
+        for (let i = 0; i < result.data.length; i++) {
+          if (socialMedia.name == result.data[i].name) {
+            lamp.value = false;
+            useSocialMedia.change(result.data[i].id, socialMedia);
+            toast.success("Successfully change social media !", {
+              autoClose: 5000,
+              theme: "dark",
+              pauseOnHover: true,
+            });
+          }
+        }
+        if (lamp.value) {
+          useSocialMedia.create(socialMedia);
+          toast.success("Successfully added social media !", {
+            autoClose: 5000,
+            theme: "dark",
+            pauseOnHover: true,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  );
+
+
+  socialMediaInfo.name = "";
+  socialMediaInfo.link = "";
+  socialMediaInfo.icon = "";
+};
 </script>
 
 <style lang="scss" scoped></style>
