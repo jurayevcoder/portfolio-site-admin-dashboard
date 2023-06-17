@@ -116,7 +116,7 @@ import { useProject } from "../../service/Project";
 const getImg = ref(null);
 const setImg = (e) => {
   getImg.value = e.target.files[0];
-  console.log(typeof getImg.value);
+  // console.log(getImg.value.name);
 };
 
 const projectInfo = reactive({
@@ -127,10 +127,10 @@ const projectInfo = reactive({
 });
 
 const addProject = () => {
-  const img = ref(String(getImg.value))
+  // const img = ref(String(getImg.value))
   const project = {
     name: projectInfo.name,
-    image: img.value,
+    image: getImg.value.name,
     link_project_ui: projectInfo.link,
     link_project_code: projectInfo.link_code,
     description: projectInfo.description,
