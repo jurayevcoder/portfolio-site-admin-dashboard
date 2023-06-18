@@ -87,6 +87,9 @@
           </button>
         </div>
       </form>
+
+
+      <!-- <img :src="dapp.value" alt=""> -->
     </div>
   </div>
 </template>
@@ -97,8 +100,9 @@ import { toast } from "vue3-toastify";
 import { usePost } from "../../service/Post";
 const getImg = ref(null);
 const setImg = (e) => {
-  getImg.value = e.target.files[0];
-  console.log(getImg.value.name);
+  console.log(e.target.files[0]);
+  getImg.value = JSON.stringify(e.target.files[0]);
+  console.log(getImg.value);
 };
 
 const postInfo = reactive({
@@ -107,9 +111,22 @@ const postInfo = reactive({
   teg: "",
 });
 
+
+// const dapp = ref({})
+
+// const get = ref(
+//   usePost.show()
+//   .then((result) => {
+//     dapp.value = JSON.parse(result.data[0].content)
+//   }).catch((err) => {
+
+//     console.log(err);
+//   })
+// )
+
 const addPost = () => {
   const post = {
-    content: getImg.value.name,
+    content: getImg.value,
     title: postInfo.title,
     description: postInfo.description,
     teg: postInfo.teg,

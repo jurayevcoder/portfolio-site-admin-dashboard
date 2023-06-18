@@ -99,142 +99,106 @@
         Posts
       </button>
     </div>
-    <div class="border-t-2 border-dashed border-[#414141] w-full rounded-lg">
-      <div :class="nav.profil ? 'w-full p-10 flex gap-5' : 'hidden'">
-        <div class="flex flex-col items-start gap- w-[28%]">
-          <div class="flex flex-col items-center gap-3">
+    <div class="border-t-2 border-dashed border-[#414141] w-full">
+      <div
+        :class="
+          nav.profil
+            ? 'w-full pt-10 flex flex-col lg:flex lg:flex-row gap-5 lg:gap-10'
+            : 'hidden'
+        "
+      >
+        <div class="flex flex-col lg:items-start w-full lg:w-[35%]">
+          <div
+            class="w-full flex flex-col items-center gap-3 border-b-2 border-[#414141] border-dashed pb-5"
+          >
             <img
-              src="https://storage.prompt-hunt.workers.dev/clfip5tj10002m7081pax422h_1"
+              src="https://avatars.githubusercontent.com/u/129625436?v=4"
               alt=""
               class="border border-white w-[400px] h-[400%] rounded-full"
             />
-            <h1
-              class="text-[24px] text-white font-semibold text-center border-b rounded-lg w-full"
-            >
-              John Doe
+            <h1 class="text-[24px] text-white font-semibold text-center w-full">
+              {{ resInfo.fullname }}
             </h1>
           </div>
-        </div>
-        <div
-          class="w-[70%] flex flex-col gap-10 border-l-2 border-[#414141] border-dashed pl-10 ml-5"
-        >
-          <div class="w-full flex items-center text-white text-[16px] gap-20">
+          <h2 class="text-[#414141] text-[20px] mt-5 mb-2 w-full">About :</h2>
+          <p
+            class="text-white text-[16px] w-full border-b-2 border-[#414141] border-dashed pb-5"
+          >
+            {{ resInfo.about }}
+          </p>
+          <div
+            class="w-full flex flex-col gap-3 text-white text-[16px] mt-5 border-b-2 border-[#414141] border-dashed pb-5"
+          >
             <h2 class="text-[#414141] text-[20px]">Contacs :</h2>
-            <div
-              class="flex items-center justify-center gap-10 border-b border-white rounded-lg px-5"
-            >
-              <p class="">+998910030951</p>
-              <p class="">john@gmail.com</p>
+            <div class="ml-10 flex flex-wrap items-center gap-5">
+              <p class="border-white rounded-lg px-3">{{ resInfo.phone }}</p>
+              <p class="border-white rounded-lg px-3">{{ resInfo.email }}</p>
             </div>
           </div>
 
           <div
-            class="w-full flex flex-wrap items-center justify-between text-white text-[16px]"
+            class="w-full flex flex-col items-center gap-3 text-white text-[16px] mt-5 border-b-2 lg:border-0 border-[#414141] border-dashed pb-5"
           >
-            <div class="flex items-center gap-20 w-[30%]">
-              <h2 class="text-[#414141] text-[20px]">Birthday :</h2>
-              <p class="border-b border-white rounded-lg px-5">2003-09-09</p>
+            <div class="w-full flex flex-wrap items-center">
+              <h2 class="text-[#414141] text-[20px] w-[50%]">Birthday :</h2>
+              <p class="w-[50%]">{{ resInfo.birthday }}</p>
             </div>
-            <div class="flex items-center gap-20 w-[30%]">
-              <h2 class="text-[#414141] text-[20px]">Age :</h2>
-              <p class="border-b border-white rounded-lg px-5">20</p>
+            <div class="w-full flex flex-wrap items-center">
+              <h2 class="text-[#414141] text-[20px] w-[50%]">Age :</h2>
+              <p class="w-[50%]">{{ resInfo.age }}</p>
             </div>
-            <div class="flex items-center gap-20 w-[30%]">
-              <h2 class="text-[#414141] text-[20px]">Experience :</h2>
-              <p class="border-b border-white rounded-lg px-5">1 years</p>
+            <div class="w-full flex flex-wrap items-center">
+              <h2 class="text-[#414141] text-[20px] w-[50%]">Experience :</h2>
+              <p class="w-[50%]">{{ resInfo.experience }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="w-full lg:w-[65%] flex flex-col lg:pl-5 lg:border-l-2 border-[#414141] border-dashed"
+        >
+          <div
+            class="w-full flex flex-col text-white text-[16px] gap-3 border-b-2 border-[#414141] border-dashed pb-5"
+          >
+            <h2 class="text-[#414141] text-[20px] w-full">Skills :</h2>
+            <div class="w-auto flex flex-wrap items-center gap-5 ml-10">
+              <span
+                v-for="el in resSkill.list"
+                :key="el.id"
+                class="text-white flex flex-wrap items-center gap-2 text-[16px] border-b border-white px-5 pb-1 rounded-lg"
+                ><i :class="el.icon + 'bx-flip-vertical bx-tada text-[24px]'"></i
+                >{{ el.name }}</span
+              >
             </div>
           </div>
 
           <div
-            class="w-full flex flex-wrap items-center text-white text-[16px] gap-8 border-t-2 border-[#414141] border-dashed pt-10"
+            class="w-full flex flex-col text-white text-[16px] gap-3 pt-5 border-b-2 border-[#414141] border-dashed pb-[22px]"
           >
-            <h2 class="text-[#414141] text-[20px]">Skills :</h2>
-            <span
-              class="text-white flex flex-wrap items-center gap-2 text-[16px] border-b border-white px-5 pb-1 rounded-lg"
-              ><i
-                class="bx bxl-javascript bx-flip-vertical bx-tada text-[24px]"
-                style="color: #f2ff02"
-              ></i
-              >JavaScript</span
-            >
-            <span
-              class="text-white flex flex-wrap items-center gap-2 text-[16px] border-b border-white px-5 pb-1 rounded-lg"
-              ><i
-                class="bx bxl-typescript bx-flip-vertical bx-tada text-[24px]"
-                style="color: #02acff"
-              ></i
-              >TypeScript</span
-            >
-            <span
-              class="text-white flex flex-wrap items-center gap-2 text-[16px] border-b border-white px-5 pb-1 rounded-lg"
-              ><i
-                class="bx bxl-javascript bx-flip-vertical bx-tada text-[24px]"
-                style="color: #f2ff02"
-              ></i
-              >JavaScript</span
-            >
-            <span
-              class="text-white flex flex-wrap items-center gap-2 text-[16px] border-b border-white px-5 pb-1 rounded-lg"
-              ><i
-                class="bx bxl-typescript bx-flip-vertical bx-tada text-[24px]"
-                style="color: #02acff"
-              ></i
-              >TypeScript</span
-            >
-            <span
-              class="text-white flex flex-wrap items-center gap-2 text-[16px] border-b border-white px-5 pb-1 rounded-lg"
-              ><i
-                class="bx bxl-javascript bx-flip-vertical bx-tada text-[24px]"
-                style="color: #f2ff02"
-              ></i
-              >JavaScript</span
-            >
-            <span
-              class="text-white flex flex-wrap items-center gap-2 text-[16px] border-b border-white px-5 pb-1 rounded-lg"
-              ><i
-                class="bx bxl-typescript bx-flip-vertical bx-tada text-[24px]"
-                style="color: #02acff"
-              ></i
-              >TypeScript</span
-            >
-            <span
-              class="text-white flex flex-wrap items-center gap-2 text-[16px] border-b border-white px-5 pb-1 rounded-lg"
-              ><i
-                class="bx bxl-javascript bx-flip-vertical bx-tada text-[24px]"
-                style="color: #f2ff02"
-              ></i
-              >JavaScript</span
-            >
-            <span
-              class="text-white flex flex-wrap items-center gap-2 text-[16px] border-b border-white px-5 pb-1 rounded-lg"
-              ><i
-                class="bx bxl-typescript bx-flip-vertical bx-tada text-[24px]"
-                style="color: #02acff"
-              ></i
-              >TypeScript</span
-            >
-            <span
-              class="text-white flex flex-wrap items-center gap-2 text-[16px] border-b border-white px-5 pb-1 rounded-lg"
-              ><i
-                class="bx bxl-javascript bx-flip-vertical bx-tada text-[24px]"
-                style="color: #f2ff02"
-              ></i
-              >JavaScript</span
-            >
-            <span
-              class="text-white flex flex-wrap items-center gap-2 text-[16px] border-b border-white px-5 pb-1 rounded-lg"
-              ><i
-                class="bx bxl-typescript bx-flip-vertical bx-tada text-[24px]"
-                style="color: #02acff"
-              ></i
-              >TypeScript</span
-            >
+            <h2 class="text-[#414141] text-[20px] w-full">Workeds :</h2>
+            <div class="w-auto flex flex-wrap items-center gap-5 ml-10">
+              <a
+                v-for="el in resWorked.list"
+                :key="el.id"
+                :href="el.link"
+                class="hover:underline hover:text-[#FF8C00]"
+                >{{ el.name }}</a
+              >
+            </div>
           </div>
 
-          <div
-            class="w-full flex flex-wrap items-center text-white text-[16px] gap-8 border-t-2 border-[#414141] border-dashed pt-10"
-          >
-            <h2 class="text-[#414141] text-[20px]">Workeds :</h2>
+          <div class="w-full flex flex-col text-white text-[16px] gap-3 pt-5">
+            <h2 class="text-[#414141] text-[20px] w-full">Social Media :</h2>
+            <div class="w-auto flex flex-wrap items-center gap-5 ml-10">
+              <div
+                v-for="el in resMedia.list"
+                :key="el.id"
+                class="flex items-center gap-2 text-white"
+              >
+                <i :class="el.icon + ' text-[24px]'"></i>
+                <a :href="el.link" class="hover:underline">{{ el.name }}</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -243,7 +207,94 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { ref, reactive } from "vue";
+import { useInfo } from "../../service/Info";
+import { useSkill } from "../../service/Skill";
+import { useWorked } from "../../service/Worked";
+import { useSocialMedia } from "../../service/Social-media";
+
+const resInfo = reactive({
+  fullname: "",
+  phone: "",
+  email: "",
+  birthday: "",
+  age: 0,
+  about: "",
+  experience: "",
+});
+
+const Info = ref(
+  useInfo
+    .show()
+    .then((result) => {
+      resInfo.fullname = result.data[0].fullname;
+      resInfo.phone = result.data[0].phone;
+      resInfo.email = result.data[0].email;
+      resInfo.birthday = result.data[0].birthday;
+      resInfo.age = result.data[0].age;
+      resInfo.about = result.data[0].about;
+      resInfo.experience = result.data[0].experience;
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+);
+
+const resSkill = reactive({
+  list: [],
+});
+
+const Skill = ref(
+  useSkill
+    .show()
+    .then((result) => {
+      for (let i = 0; i < result.data.length; i++) {
+        resSkill.list.push({ name: result.data[i].name, icon: result.data[i].icon });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+);
+
+const resWorked = reactive({
+  list: [],
+});
+
+const Worked = ref(
+  useWorked
+    .show()
+    .then((result) => {
+      for (let i = 0; i < result.data.length; i++) {
+        resWorked.list.push({ name: result.data[i].name, link: result.data[i].link });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+);
+
+const resMedia = reactive({
+  list: [],
+});
+
+const SocialMedia = ref(
+  useSocialMedia
+    .show()
+    .then((result) => {
+      for (let i = 0; i < result.data.length; i++) {
+        resMedia.list.push({
+          name: result.data[i].name,
+          link: result.data[i].link,
+          icon: result.data[i].icon,
+        });
+      }
+      console.log(resMedia.list[0].icon);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+);
 
 const nav = reactive({
   profil: true,
