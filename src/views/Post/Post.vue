@@ -16,6 +16,7 @@
                 >Image or Video</label
               >
               <input
+                accept="video/*, image/jpg, image/jpeg, image/png"
                 type="file"
                 name="image"
                 id="image"

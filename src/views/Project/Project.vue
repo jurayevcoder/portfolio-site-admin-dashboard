@@ -31,6 +31,7 @@
                 >Image</label
               >
               <input
+                accept="image/jpg, image/jpeg, image/png"
                 type="file"
                 name="image"
                 id="image"
