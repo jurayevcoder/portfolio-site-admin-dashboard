@@ -99,11 +99,11 @@
         Posts
       </button>
     </div>
-    <div class="border-t-2 border-dashed border-[#414141] w-full">
+    <div class="w-full">
       <div
         :class="
           nav.profil
-            ? 'w-full pt-10 flex flex-col lg:flex lg:flex-row gap-5 lg:gap-10'
+            ? 'w-full pt-10 flex flex-col lg:flex lg:flex-row gap-5 lg:gap-10 border-t-2 border-dashed border-[#414141] '
             : 'hidden'
         "
       >
@@ -201,6 +201,33 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <div
+        :class="
+          nav.project ? 'w-full flex items-center justify-between gap-5 lg:px' : 'hidden'
+        "
+      >
+        <button
+          class="hover:bg-[#FF8C00] hover:text-white text-[30px] text-[#FF8C00] border border-[#FF8C00] flex items-center justify-center rounded-full w-12 h-12"
+        >
+          <i class="bx bx-chevron-left"></i>
+        </button>
+        <div class="w-[85%] border border-white rounded-lg flex flex-col lg:flex lg:flex-row">
+          <div class="lg:w-[40%] w-full h-[500px] flex items-center justify-center">
+            <img
+              src="https://blogs.vmware.com/security/files/2020/05/haking_is_the_new_espionage.jpg"
+              class="rounded-l-lg"
+              alt=""
+            />
+          </div>
+          <div class="w-full lg:w-[60%] border-l border-white"></div>
+        </div>
+        <button
+          class="hover:bg-[#FF8C00] hover:text-white text-[30px] text-[#FF8C00] border border-[#FF8C00] flex items-center justify-center rounded-full w-12 h-12"
+        >
+          <i class="bx bx-chevron-right"></i>
+        </button>
       </div>
     </div>
   </div>
