@@ -202,61 +202,133 @@
           </div>
         </div>
       </div>
-
-      <div
-        :class="
-          nav.project
-            ? 'w-full flex items-center justify-between gap-5 mt-5 mb-5 lg:px'
-            : 'hidden'
-        "
-      >
-        <button
-        @click="btnBack"
-          class="hover:bg-[#FF8C00] hover:text-white text-[30px] text-[#FF8C00] border border-[#FF8C00] flex items-center justify-center rounded-full w-12 h-12"
+      <div :class="nav.project ? 'w-full mt-5 mb-5' : 'hidden'">
+        <h1 :class="leng.project == 0 ? 'text-[25px] text-white' : 'hidden'">
+          Empty project
+        </h1>
+        <div
+          :class="
+            leng.project == 0
+              ? 'hidden'
+              : 'w-full flex items-center justify-between gap-5'
+          "
         >
-          <i class="bx bx-chevron-left"></i>
-        </button>
-        <div class="w-[85%] border border-white rounded-lg flex flex-col">
-          <div
-            class="w-full max:h-[500px] flex sm:items-center justify-center items-start p-1"
+          <button
+            @click="btnBack"
+            class="hover:bg-[#FF8C00] hover:text-white text-[30px] text-[#FF8C00] border border-[#FF8C00] flex items-center justify-center rounded-full w-12 h-12"
           >
-            <img
-              src="https://blogs.vmware.com/security/files/2020/05/haking_is_the_new_espionage.jpg"
-              class=""
-              alt=""
-            />
-          </div>
-          <div class="w-full border-t lg:border-l border-white p-5">
-            <h2 class="text-[25px] text-white font-semibold mb-5">
-              {{ value?.project?.name }}
-            </h2>
-            <div class="w-full flex items-center gap-3 text-white mb-5">
-              <i class="bx bx-world text-[25px]"></i>
-              <a
-                :href="value?.project?.link_project_ui"
-                class="underline hover:text-green-500"
-                >View web site</a
-              >
+            <i class="bx bx-chevron-left"></i>
+          </button>
+          <div class="w-[85%] border border-white rounded-lg flex flex-col">
+            <div
+              class="w-full max:h-[500px] flex sm:items-center justify-center items-start p-1"
+            >
+              <img
+                src="https://blogs.vmware.com/security/files/2020/05/haking_is_the_new_espionage.jpg"
+                class=""
+                alt=""
+              />
             </div>
-            <div class="w-full flex items-center gap-3 text-white mb-5 lg:mb-10">
-              <i class="bx bx-code-alt text-[25px]"></i>
-              <a
-                :href="value?.project?.link_project_code"
-                class="underline texts hover:text-green-500"
-                >View code</a
-              >
+            <div class="w-full border-t lg:border-l border-white p-5">
+              <div class="w-full flex items-center justify-between mb-5">
+                <h2 class="w-auto text-[25px] text-white font-semibold">
+                  {{ value?.project?.name }}
+                </h2>
+                <div class="w-auto flex flex-wrap items-center gap-5">
+                  <button
+                    @click="delProject(value?.project?.id)"
+                    class="text-[25px] text-red-600"
+                  >
+                    <i class="bx bx-trash"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="w-full flex items-center gap-3 text-white mb-5">
+                <i class="bx bx-world text-[25px]"></i>
+                <a
+                  :href="value?.project?.link_project_ui"
+                  class="underline hover:text-green-500"
+                  >View web site</a
+                >
+              </div>
+              <div class="w-full flex items-center gap-3 text-white mb-5 lg:mb-10">
+                <i class="bx bx-code-alt text-[25px]"></i>
+                <a
+                  :href="value?.project?.link_project_code"
+                  class="underline texts hover:text-green-500"
+                  >View code</a
+                >
+              </div>
+              <p class="text-[16px] text-white">
+                {{ value?.project?.description }}
+              </p>
             </div>
-            <p class="text-[16px] text-white">
-              {{ value?.project?.description }}
-            </p>
           </div>
+          <button
+            @click="btnNext"
+            class="hover:bg-[#FF8C00] hover:text-white text-[30px] text-[#FF8C00] border border-[#FF8C00] flex items-center justify-center rounded-full w-12 h-12"
+          >
+            <i class="bx bx-chevron-right"></i>
+          </button>
         </div>
-        <button
-          @click="btnNext"
-          class="hover:bg-[#FF8C00] hover:text-white text-[30px] text-[#FF8C00] border border-[#FF8C00] flex items-center justify-center rounded-full w-12 h-12"
+      </div>
+
+      <div :class="nav.post ? 'w-full mt-5 mb-5' : 'hidden'">
+        <h1 :class="leng.post == 0 ? 'text-[25px] text-white' : 'hidden'">
+          Empty post
+        </h1>
+        <div
+          :class="
+            leng.post == 0 ? 'hidden' : 'w-full flex items-center justify-between gap-5'
+          "
         >
-          <i class="bx bx-chevron-right"></i>
-        </button>
+          <button
+            @click="btnBackPost"
+            class="hover:bg-[#FF8C00] hover:text-white text-[30px] text-[#FF8C00] border border-[#FF8C00] flex items-center justify-center rounded-full lg:w-12 lg:h-12"
+          >
+            <i class="bx bx-chevron-left"></i>
+          </button>
+          <div class="w-[85%] border border-white rounded-lg flex flex-col">
+            <div class="w-full flex sm:items-center justify-center items-start p-1">
+              <img
+                src="https://balkaninsight.com/wp-content/uploads/2020/10/hacker-scaled-e1645110068231-1280x720.jpg"
+                class="max-h-[500px]"
+                alt=""
+              />
+            </div>
+            <div class="w-full border-t lg:border-l border-white p-5">
+              <div class="w-full flex items-center justify-between mb-5">
+                <h2 class="w-auto text-[25px] text-white font-semibold">
+                  {{ value?.post?.title }}
+                </h2>
+                <div class="w-auto flex flex-wrap items-center gap-5">
+                  <button class="text-[25px] text-teal-500">
+                    <i class="bx bxs-message-rounded-detail"></i>
+                  </button>
+                  <button
+                    @click="delPost(value?.post?.id)"
+                    class="text-[25px] text-red-600"
+                  >
+                    <i class="bx bx-trash"></i>
+                  </button>
+                </div>
+              </div>
+
+              <p class="text-[16px] text-white mb-5">
+                {{ value?.post?.description }}
+              </p>
+              <p class="text-[16px] text-blue-500">
+                {{ value?.post?.teg }}
+              </p>
+            </div>
+          </div>
+          <button
+            @click="btnNextPost"
+            class="hover:bg-[#FF8C00] hover:text-white text-[30px] text-[#FF8C00] border border-[#FF8C00] flex items-center justify-center rounded-full lg:w-12 lg:h-12"
+          >
+            <i class="bx bx-chevron-right"></i>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -271,6 +343,7 @@ import { useSocialMedia } from "../../service/Social-media";
 import { useAuth } from "../../service/auth";
 import { useProject } from "../../service/Project";
 import { usePost } from "../../service/Post";
+import { toast } from "vue3-toastify";
 
 const leng = reactive({
   user: 0,
@@ -297,13 +370,32 @@ const User = ref(
 
 const count = reactive({
   sch: 0,
+  chs: 0,
 });
 
+const delProject = (id) => {
+  useProject.delete(id);
+  toast.success("Successfully delete project !", {
+    autoClose: 5000,
+    theme: "dark",
+    pauseOnHover: true,
+  });
+};
+
+const delPost = (id) => {
+  usePost.delete(id);
+  toast.success("Successfully delete post !", {
+    autoClose: 5000,
+    theme: "dark",
+    pauseOnHover: true,
+  });
+};
+
 const btnNext = () => {
-  if (leng.project-1 <= count.sch) {
-    count.sch = 0
+  if (leng.project - 1 <= count.sch) {
+    count.sch = 0;
   } else {
-    count.sch = count.sch + 1
+    count.sch = count.sch + 1;
   }
   useProject
     .show()
@@ -314,14 +406,14 @@ const btnNext = () => {
     })
     .catch((err) => {
       console.log(err);
-    })
+    });
 };
 
 const btnBack = () => {
   if (count.sch == 0) {
-    count.sch = leng.project-1
+    count.sch = leng.project - 1;
   } else {
-    count.sch = count.sch - 1
+    count.sch = count.sch - 1;
   }
   useProject
     .show()
@@ -332,7 +424,43 @@ const btnBack = () => {
     })
     .catch((err) => {
       console.log(err);
+    });
+};
+
+const btnNextPost = () => {
+  if (leng.post - 1 <= count.chs) {
+    count.chs = 0;
+  } else {
+    count.chs = count.chs + 1;
+  }
+  usePost
+    .show()
+    .then((result) => {
+      for (let i = 0; i < result.data.length; i++) {
+        value.post = result.data[count.chs];
+      }
     })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const btnBackPost = () => {
+  if (count.chs == 0) {
+    count.chs = leng.post - 1;
+  } else {
+    count.chs = count.chs - 1;
+  }
+  usePost
+    .show()
+    .then((result) => {
+      for (let i = 0; i < result.data.length; i++) {
+        value.post = result.data[count.chs];
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 const Poroject = ref(
@@ -343,7 +471,6 @@ const Poroject = ref(
       for (let i = 0; i < result.data.length; i++) {
         value.project = result.data[count.sch];
       }
-      // console.log(value.project[0].name);
     })
     .catch((err) => {
       console.log(err);
@@ -355,6 +482,9 @@ const Post = ref(
     .show()
     .then((result) => {
       leng.post = result.data.length;
+      for (let i = 0; i < result.data.length; i++) {
+        value.post = result.data[count.chs];
+      }
     })
     .catch((err) => {
       console.log(err);
@@ -444,8 +574,8 @@ const SocialMedia = ref(
 );
 
 const nav = reactive({
-  profil: false,
-  project: true,
+  profil: true,
+  project: false,
   post: false,
 });
 
