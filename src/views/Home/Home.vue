@@ -13,7 +13,7 @@
         </div>
         <div>
           <p class="mb-2 text-sm font-medium text-gray-400">Total users</p>
-          <p class="text-lg font-semibold text-white">6389</p>
+          <p class="text-lg font-semibold text-white">{{ leng.user }}</p>
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@
         </div>
         <div>
           <p class="mb-2 text-sm font-medium text-gray-400">Total projects</p>
-          <p class="text-lg font-semibold text-white">5</p>
+          <p class="text-lg font-semibold text-white">{{ leng.project }}</p>
         </div>
       </div>
     </div>
@@ -45,7 +45,7 @@
         </div>
         <div>
           <p class="mb-2 text-sm font-medium text-gray-400">Total posts</p>
-          <p class="text-lg font-semibold text-white">37</p>
+          <p class="text-lg font-semibold text-white">{{ leng.post }}</p>
         </div>
       </div>
     </div>
@@ -205,25 +205,54 @@
 
       <div
         :class="
-          nav.project ? 'w-full flex items-center justify-between gap-5 lg:px' : 'hidden'
+          nav.project
+            ? 'w-full flex items-center justify-between gap-5 mt-5 mb-5 lg:px'
+            : 'hidden'
         "
       >
         <button
+        @click="btnBack"
           class="hover:bg-[#FF8C00] hover:text-white text-[30px] text-[#FF8C00] border border-[#FF8C00] flex items-center justify-center rounded-full w-12 h-12"
         >
           <i class="bx bx-chevron-left"></i>
         </button>
-        <div class="w-[85%] border border-white rounded-lg flex flex-col lg:flex lg:flex-row">
-          <div class="lg:w-[40%] w-full h-[500px] flex items-center justify-center">
+        <div class="w-[85%] border border-white rounded-lg flex flex-col">
+          <div
+            class="w-full max:h-[500px] flex sm:items-center justify-center items-start p-1"
+          >
             <img
               src="https://blogs.vmware.com/security/files/2020/05/haking_is_the_new_espionage.jpg"
-              class="rounded-l-lg"
+              class=""
               alt=""
             />
           </div>
-          <div class="w-full lg:w-[60%] border-l border-white"></div>
+          <div class="w-full border-t lg:border-l border-white p-5">
+            <h2 class="text-[25px] text-white font-semibold mb-5">
+              {{ value?.project?.name }}
+            </h2>
+            <div class="w-full flex items-center gap-3 text-white mb-5">
+              <i class="bx bx-world text-[25px]"></i>
+              <a
+                :href="value?.project?.link_project_ui"
+                class="underline hover:text-green-500"
+                >View web site</a
+              >
+            </div>
+            <div class="w-full flex items-center gap-3 text-white mb-5 lg:mb-10">
+              <i class="bx bx-code-alt text-[25px]"></i>
+              <a
+                :href="value?.project?.link_project_code"
+                class="underline texts hover:text-green-500"
+                >View code</a
+              >
+            </div>
+            <p class="text-[16px] text-white">
+              {{ value?.project?.description }}
+            </p>
+          </div>
         </div>
         <button
+          @click="btnNext"
           class="hover:bg-[#FF8C00] hover:text-white text-[30px] text-[#FF8C00] border border-[#FF8C00] flex items-center justify-center rounded-full w-12 h-12"
         >
           <i class="bx bx-chevron-right"></i>
@@ -239,6 +268,98 @@ import { useInfo } from "../../service/Info";
 import { useSkill } from "../../service/Skill";
 import { useWorked } from "../../service/Worked";
 import { useSocialMedia } from "../../service/Social-media";
+import { useAuth } from "../../service/auth";
+import { useProject } from "../../service/Project";
+import { usePost } from "../../service/Post";
+
+const leng = reactive({
+  user: 0,
+  project: 0,
+  post: 0,
+  msg: 0,
+});
+
+const value = reactive({
+  project: null,
+  post: null,
+});
+
+const User = ref(
+  useAuth
+    .get()
+    .then((result) => {
+      leng.user = result.data.length;
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+);
+
+const count = reactive({
+  sch: 0,
+});
+
+const btnNext = () => {
+  if (leng.project-1 <= count.sch) {
+    count.sch = 0
+  } else {
+    count.sch = count.sch + 1
+  }
+  useProject
+    .show()
+    .then((result) => {
+      for (let i = 0; i < result.data.length; i++) {
+        value.project = result.data[count.sch];
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+};
+
+const btnBack = () => {
+  if (count.sch == 0) {
+    count.sch = leng.project-1
+  } else {
+    count.sch = count.sch - 1
+  }
+  useProject
+    .show()
+    .then((result) => {
+      for (let i = 0; i < result.data.length; i++) {
+        value.project = result.data[count.sch];
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+};
+
+const Poroject = ref(
+  useProject
+    .show()
+    .then((result) => {
+      leng.project = result.data.length;
+      for (let i = 0; i < result.data.length; i++) {
+        value.project = result.data[count.sch];
+      }
+      // console.log(value.project[0].name);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+);
+
+const Post = ref(
+  usePost
+    .show()
+    .then((result) => {
+      leng.post = result.data.length;
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+);
 
 const resInfo = reactive({
   fullname: "",
@@ -316,7 +437,6 @@ const SocialMedia = ref(
           icon: result.data[i].icon,
         });
       }
-      console.log(resMedia.list[0].icon);
     })
     .catch((err) => {
       console.log(err);
@@ -324,8 +444,8 @@ const SocialMedia = ref(
 );
 
 const nav = reactive({
-  profil: true,
-  project: false,
+  profil: false,
+  project: true,
   post: false,
 });
 
@@ -339,3 +459,4 @@ const togglePost = () => ((nav.profil = false), (nav.project = false), (nav.post
 </script>
 
 <style lang="scss" scoped></style>
+setImg
