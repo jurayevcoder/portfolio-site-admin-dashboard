@@ -166,7 +166,7 @@
                 v-for="el in resSkill.list"
                 :key="el.id"
                 class="text-white flex flex-wrap items-center gap-2 text-[16px] border-b border-white px-5 pb-1 rounded-lg"
-                ><i :class="el.icon + 'bx-flip-vertical bx-tada text-[24px]'"></i
+                ><i :class="el.icon + ' bx-flip-vertical bx-tada text-[24px]'"></i
                 >{{ el.name }}</span
               >
             </div>
