@@ -221,11 +221,11 @@
           </button>
           <div class="w-[85%] border border-white rounded-lg flex flex-col">
             <div
-              class="w-full max:h-[500px] flex sm:items-center justify-center items-start p-1"
+              class="w-full flex sm:items-center justify-center items-start p-1"
             >
               <img
-                src="https://blogs.vmware.com/security/files/2020/05/haking_is_the_new_espionage.jpg"
-                class=""
+                :src="'https://picsum.photos/1500/700?random=' + value?.project?.id"
+                class="max-h-[700px]"
                 alt=""
               />
             </div>
@@ -291,8 +291,8 @@
           <div class="w-[85%] border border-white rounded-lg flex flex-col">
             <div class="w-full flex sm:items-center justify-center items-start p-1">
               <img
-                src="https://balkaninsight.com/wp-content/uploads/2020/10/hacker-scaled-e1645110068231-1280x720.jpg"
-                class="max-h-[500px]"
+              :src="'https://picsum.photos/1500/700?random=' + value?.post?.id"
+                class="max-h-[700px]"
                 alt=""
               />
             </div>
